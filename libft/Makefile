@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bsabre-c <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: forange- <forange-@student.fr.42>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/26 16:00:22 by bsabre-c          #+#    #+#              #
-#    Updated: 2019/07/05 18:08:10 by bsabre-c         ###   ########.fr        #
+#    Updated: 2019/07/17 17:15:52 by forange-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = libft.a
-FLAGS = -Wall -Wextra -Werror -c
+FLAGS = -g -Wall -Wextra -Werror -c
 OBJECTS =	ft_absi.o		ft_absll.o		ft_atoi.o		ft_atoll.o		\
 			ft_bzero.o		ft_isalnum.o	ft_isalpha.o	ft_isascii.o	\
 			ft_isdigit.o	ft_isprint.o	ft_itoa.o		ft_lltoa.o		\
