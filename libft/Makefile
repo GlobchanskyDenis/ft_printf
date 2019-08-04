@@ -6,7 +6,7 @@
 #    By: forange- <forange-@student.fr.42>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/26 16:00:22 by bsabre-c          #+#    #+#              #
-#    Updated: 2019/07/17 17:15:52 by forange-         ###   ########.fr        #
+#    Updated: 2019/08/04 14:40:22 by forange-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ OBJECTS =	ft_absi.o		ft_absll.o		ft_atoi.o		ft_atoll.o		\
 			ft_strncpy.o	ft_strnequ.o	ft_strnew.o		ft_strnstr.o	\
 			ft_strrchr.o	ft_strsplit.o	ft_strstr.o		ft_strsub.o		\
 			ft_strtrim.o	ft_tolower.o	ft_toupper.o	ft_lstnew_fag.o	\
-			ft_list_bublesort.o				ft_list_murgesort.o
+			ft_list_bublesort.o				ft_list_murgesort.o				\
+			ft_wstrlen.o ft_putwchar_fd.o ft_putwstrn_fd.o
 
 FILES = 	ft_absi.c		ft_absll.c		ft_atoi.c		ft_atoll.c		\
 			ft_bzero.c		ft_isalnum.c	ft_isalpha.c	ft_isascii.c	\
@@ -47,7 +48,8 @@ FILES = 	ft_absi.c		ft_absll.c		ft_atoi.c		ft_atoll.c		\
 			ft_strncpy.c	ft_strnequ.c	ft_strnew.c		ft_strnstr.c	\
 			ft_strrchr.c	ft_strsplit.c	ft_strstr.c		ft_strsub.c		\
 			ft_strtrim.c	ft_tolower.c	ft_toupper.c	ft_lstnew_fag.c	\
-			ft_list_bublesort.c				ft_list_murgesort.c
+			ft_list_bublesort.c				ft_list_murgesort.c \
+			ft_wstrlen.c ft_putwchar_fd.c ft_putwstrn_fd.c
 
 $(NAME) :
 	gcc $(FLAGS) $(FILES)

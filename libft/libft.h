@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsabre-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: forange- <forange-@student.fr.42>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:34:29 by bsabre-c          #+#    #+#             */
-/*   Updated: 2019/07/06 12:30:55 by bsabre-c         ###   ########.fr       */
+/*   Updated: 2019/08/04 14:38:53 by forange-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,7 @@ t_list				*ft_list_bublesort(t_list *begin_list, int (*f)(t_list *));
 void				ft_list_murgesort(t_list **begin_list,
 		int (*f)(t_list *, t_list *));
 t_list				*ft_lstnew_fag(void *content, size_t content_size);
-
+size_t				ft_wstrlen(const wchar_t *str);
+size_t				ft_putwchar_fd(wchar_t c, int fd);
+size_t				ft_putwstrn_fd(wchar_t *str, size_t len, int fd);
 #endif
