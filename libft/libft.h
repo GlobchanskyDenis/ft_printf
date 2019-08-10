@@ -6,7 +6,7 @@
 /*   By: forange- <forange-@student.fr.42>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:34:29 by bsabre-c          #+#    #+#             */
-/*   Updated: 2019/08/04 14:38:53 by forange-         ###   ########.fr       */
+/*   Updated: 2019/08/10 17:34:40 by forange-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,8 @@ t_list				*ft_lstnew_fag(void *content, size_t content_size);
 size_t				ft_wstrlen(const wchar_t *str);
 size_t				ft_putwchar_fd(wchar_t c, int fd);
 size_t				ft_putwstrn_fd(wchar_t *str, size_t len, int fd);
+void				ft_strupr(char *str);
+char				*ft_ulltoa_base(unsigned long long dgt, int base);
+char				*ft_lltoa_base(long long dgt, int base);
+void				ft_putchar_fd_smpl(char c, int fd);
 #endif

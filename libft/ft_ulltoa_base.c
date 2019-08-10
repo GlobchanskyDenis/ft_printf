@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_uitoal_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: forange- <forange-@student.fr.42>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/10 17:33:40 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/10 17:36:50 by forange-         ###   ########.fr       */
+/*   Created: 2019/08/10 17:12:16 by forange-          #+#    #+#             */
+/*   Updated: 2019/08/10 17:27:36 by forange-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+char					*ft_ulltoa_base(unsigned long long dgt, int base)
 {
-	unsigned char	a;
-	unsigned char	b;
-	unsigned char	ch;
+	unsigned long long	temp;
+	int					i;
+	char				*out;
 
-	if (!(c >> 7))
-		write(fd, &c, 1);
-	else
+	i = 0;
+	if (base < 2 && base > 16)
+		return (NULL);
+	temp = dgt;
+	while (temp)
 	{
-		ch = (unsigned char)c;
-		a = 0b11000000 | (ch >> 6);
-		b = (ch & 0b00111111) | 0b10000000;
-		write(fd, &a, 1);
-		write(fd, &b, 1);
+		temp /= base;
+		i++;
 	}
+	out = (char*)malloc(i + 1);
+	out[i] = '\0';
+	while (dgt)
+	{
+		temp = dgt % base;
+		out[--i] = (temp > 9) ? (temp - 10) + 'a' : temp + '0';
+		dgt /= base;
+	}
+	return (out);
 }
