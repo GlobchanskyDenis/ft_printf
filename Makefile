@@ -3,43 +3,88 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bsabre-c <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: kirill <kirill@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/07/12 17:19:13 by bsabre-c          #+#    #+#              #
-#    Updated: 2019/08/12 11:45:04 by bsabre-c         ###   ########.fr        #
+#    Created: 2018/12/08 23:08:59 by kirill            #+#    #+#              #
+#    Updated: 2019/08/12 20:49:00 by kirill           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	out
-FLAGS	=	-Wall -Wextra -Werror
+NAME=libftprintf.a
 
-SRC		=	main.c					errors.c			long_math_1.c		\
-			long_math_2.c			long_math_sum.c		long_math_sum2.c	\
-			dl_list.c				long_math_mult.c	long_math_sqr.c		\
-			ft_printf.c				type_chr.c			parser.c			\
-			type_str.c				table.c				type_handlers.c		\
-			type_hex.c				type_oct.c			type_float.c		\
-			bonus.c
+BIN_DIR=bin
 
-INCLUDE	=	ft_printf.h
+BIN_NAME=out
 
-# libraries
-L_FT	=	./libft/
-L_FT_A 	=	$(L_FT)libft.a
+BIN=$(addprefix $(BIN_DIR)/,$(BIN_NAME))
 
-$(NAME) :
-	make -C $(L_FT)
-	gcc $(FLAGS) $(SRC) -I$(INCLUDE) $(L_FT_A) -o $(NAME)
+CC=gcc
 
-clean :
-	make clean -C $(L_FT)
-	rm -rf .DS_Store
-	rm -rf $(L_FT).DS_Store
+CFLAGS=-Wall -Wextra -Werror
 
-fclean : clean
-	make fclean -C $(L_FT)
-	rm -f $(NAME)
+LIBFT = libft
 
-all : $(NAME)
+DIR_O = temporary
 
-re: fclean $(NAME)
+HEADER = -I./$(LIBFT)
+
+SOURCES = 	bonus.c				\
+			dl_list.c			\
+			errors.c			\
+			ft_printf.c			\
+			long_math_1.c		\
+			long_math_2.c		\
+			long_math_mult.c	\
+			long_math_sqr.c		\
+			long_math_sum.c		\
+			long_math_sum2.c	\
+			parser.c			\
+			table.c				\
+			type_chr.c			\
+			type_float.c		\
+			type_handlers.c		\
+			type_hex.c			\
+			type_oct.c			\
+			type_str.c
+
+OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
+
+.PHONY: all clean fclean re build
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	@echo "Compiling libft and libftprintf"
+	@make -sC $(LIBFT)
+	@echo "Done"
+	@cp -p $(LIBFT)/libft.a ./$(NAME)
+	@ar r $(NAME) $(OBJS)
+	@ranlib $(NAME)
+
+$(DIR_O)/%.o: %.c
+	@mkdir -p temporary
+	@$(CC) $(HEADER) $(FLAGS) -o $@ -c $<
+
+build: $(BIN)
+
+$(BIN): $(NAME) main.c
+	@echo "compiling binary with main.c to /bin/out"
+	@mkdir -p bin
+	@$(CC) $(FLAGS) main.c -L. -lftprintf -o $(BIN)
+
+clean:
+	@echo "Removing objects"
+	@rm -f $(OBJS)
+	@rm -rf $(DIR_O)
+	@make clean -sC $(LIBFT)
+	@echo "Done"
+
+fclean: clean
+	@echo "Removing library"
+	@rm -f $(NAME)
+	@make fclean -sC $(LIBFT)
+	@echo "Removing binary"
+	@rm -rf $(BIN_DIR)
+	@echo "Done"
+
+re: fclean all
