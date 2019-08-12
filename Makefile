@@ -6,7 +6,7 @@
 #    By: kirill <kirill@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/08 23:08:59 by kirill            #+#    #+#              #
-#    Updated: 2019/08/12 20:49:00 by kirill           ###   ########.fr        #
+#    Updated: 2019/08/12 21:09:28 by kirill           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,6 +83,7 @@ fclean: clean
 	@echo "Removing library"
 	@rm -f $(NAME)
 	@make fclean -sC $(LIBFT)
+	@echo "Done"
 	@echo "Removing binary"
 	@rm -rf $(BIN_DIR)
 	@echo "Done"
