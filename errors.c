@@ -1,0 +1,76 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bsabre-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/22 15:10:20 by bsabre-c          #+#    #+#             */
+/*   Updated: 2019/08/02 18:50:05 by bsabre-c         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
+
+void	error_func_free(char *message, t_dl_lst **l1, t_dl_lst **l2, char *str)
+{
+	if (l1)
+	{
+		if (*l1)
+			dl_lstdel(*l1);
+	}
+	if (l2)
+	{
+		if (*l2)
+			dl_lstdel(*l2);
+	}
+	if (str)
+		ft_strdel(&str);
+	write(1, message, ft_strlen(message));
+	exit(1);
+}
+
+void	error_func_free_lst(char *message, t_dl_lst **lst1, t_dl_lst **lst2,
+		t_dl_lst **lst3)
+{
+	if (lst1)
+	{
+		if (*lst1)
+			dl_lstdel(*lst1);
+	}
+	if (lst2)
+	{
+		if (*lst2)
+			dl_lstdel(*lst2);
+	}
+	if (lst3)
+	{
+		if (*lst3)
+			dl_lstdel(*lst3);
+	}
+	write(1, message, ft_strlen(message));
+	exit(1);
+}
+
+void	*error_return_null_free(t_dl_lst **lst1, t_dl_lst **lst2,
+		t_dl_lst **lst3, char *str)
+{
+	if (lst1)
+	{
+		if (*lst1)
+			dl_lstdel(*lst1);
+	}
+	if (lst2)
+	{
+		if (*lst2)
+			dl_lstdel(*lst2);
+	}
+	if (lst3)
+	{
+		if (*lst3)
+			dl_lstdel(*lst3);
+	}
+	if (str)
+		ft_strdel(&str);
+	return (NULL);
+}
