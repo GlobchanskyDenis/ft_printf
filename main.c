@@ -6,7 +6,7 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 15:49:57 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/12 20:49:39 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/13 00:10:54 by kirill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,12 @@ int	main(void)
 	*/
 	printf("ld = '% -12Lf';\n", ld);
 	ft_printf("ld = '% -12Lf';\n\n\n", ld);
+
+	int out = printf("%f", 0.000001);
+	printf("\nout = %d\n", out);
+	out = ft_printf("%f", 0.000001);
+	printf("\nout = %d\n", out);
+
 	printf ("%lx\n", LONG_MIN);
 	ft_printf ("%lX #\n", LONG_MIN);
 	printf ("%lx\n\n", LONG_MAX);
@@ -208,11 +214,11 @@ int	main(void)
 	printf ("%llx\n\n", LLONG_MAX);
 	ft_printf ("%llx\n\n", LLONG_MAX);
 
-	printf("%15.1%%s\n", "test");
+	//printf("%15.1%%s\n", "test");
 	ft_printf("%15.1%%s\n", "test");
 
 	printf("%%#X INT_MAX ==  %#X\n", INT_MAX);
-	int out = printf("%42.8ls", L"");
+	out = printf("%42.8ls", L"");
 	printf("\nout = %d\n", out);
 	out = ft_printf("%42.8ls", L"");
 	printf("\nout = %d\n", out);

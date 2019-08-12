@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   oct_type.c                                         :+:      :+:    :+:   */
+/*   type_oct.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: forange- <forange-@student.fr.42>          +#+  +:+       +#+        */
+/*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:07:38 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/10 19:12:42 by forange-         ###   ########.fr       */
+/*   Updated: 2019/08/13 00:17:17 by kirill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ static int				ft_gen_oct(unsigned long long in, t_printf *tprint)
 	char				*digit;
 	int					len;
 
-	digit = ft_strjoin(tprint->flag & F_HASH ? "0" : "", ft_ulltoa_base(in, 8));
+	digit = ft_strjoin(tprint->flag & F_HASH ? "0" : "", \
+		(filler = ft_ulltoa_base(in, 8)));
+	free(filler);
 	len = ft_strlen(digit);
 	len = (tprint->flag & F_PREC && len < tprint->prec) ? tprint->prec : len;
 	filler = ft_strnew(len > tprint->width ? len : tprint->width);

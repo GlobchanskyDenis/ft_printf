@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_hex.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: forange- <forange-@student.fr.42>          +#+  +:+       +#+        */
+/*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 17:35:04 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/10 19:20:18 by forange-         ###   ########.fr       */
+/*   Updated: 2019/08/13 00:14:50 by kirill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int				ft_gen_hex(unsigned long long in, t_printf *tprint)
 	int					len;
 
 	digit = ft_strjoin(tprint->flag & F_HASH ? "0x" : "", \
-						ft_ulltoa_base(in, 16));
+						(filler = ft_ulltoa_base(in, 16)));
+	free(filler);
 	if (tprint->flag & F_UP)
 		ft_strupr(digit);
 	len = ft_strlen(digit);
