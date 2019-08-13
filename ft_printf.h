@@ -6,7 +6,7 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 17:32:31 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/12 19:53:44 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/13 15:59:46 by bsabre-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ char			*turn_flpoint_to_str(long double ld, char base,
 int				long_math_strlen(t_dl_lst *lst, t_printf *tprintf, t_sem sem);
 char			*turn_dl_lst_to_str(t_dl_lst *lst, t_printf tprintf,
 		t_sem sem);
-
+void			round_up_dl_lst(t_dl_lst **lst, int precision);
 t_dl_lst		*long_math_sum(t_dl_lst *nbr1, t_dl_lst *nbr2);
 void			long_math_sum_calc(t_dl_lst *nbr1, t_dl_lst **nbr2);
 void			long_math_sum_add_rest(t_dl_lst *nbr1, char rest);

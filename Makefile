@@ -6,7 +6,7 @@
 #    By: kirill <kirill@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/08 23:08:59 by kirill            #+#    #+#              #
-#    Updated: 2019/08/12 21:09:28 by kirill           ###   ########.fr        #
+#    Updated: 2019/08/13 15:58:09 by bsabre-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,23 +28,24 @@ DIR_O = temporary
 
 HEADER = -I./$(LIBFT)
 
-SOURCES = 	bonus.c				\
-			dl_list.c			\
-			errors.c			\
-			ft_printf.c			\
-			long_math_1.c		\
-			long_math_2.c		\
-			long_math_mult.c	\
-			long_math_sqr.c		\
-			long_math_sum.c		\
-			long_math_sum2.c	\
-			parser.c			\
-			table.c				\
-			type_chr.c			\
-			type_float.c		\
-			type_handlers.c		\
-			type_hex.c			\
-			type_oct.c			\
+SOURCES = 	bonus.c					\
+			dl_list.c				\
+			errors.c				\
+			ft_printf.c				\
+			long_math_1.c			\
+			long_math_2.c			\
+			long_math_round_up.c	\
+			long_math_mult.c		\
+			long_math_sqr.c			\
+			long_math_sum.c			\
+			long_math_sum2.c		\
+			parser.c				\
+			table.c					\
+			type_chr.c				\
+			type_float.c			\
+			type_handlers.c			\
+			type_hex.c				\
+			type_oct.c				\
 			type_str.c
 
 OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))

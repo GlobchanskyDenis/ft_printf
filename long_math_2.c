@@ -6,40 +6,11 @@
 /*   By: bsabre-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 13:33:58 by bsabre-c          #+#    #+#             */
-/*   Updated: 2019/08/12 15:53:29 by bsabre-c         ###   ########.fr       */
+/*   Updated: 2019/08/13 15:57:05 by bsabre-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static void	round_up_dl_lst(t_dl_lst **lst, int precision)
-{
-	t_dl_lst	*tmp;
-
-	if (!lst || !(*lst))
-		error_func_free(EMPTY_PTR, NULL, NULL, NULL);
-	if (precision < 0)
-		precision = STANDART_PRECISION;
-	while ((*lst)->rank < -precision && (*lst)->prev)
-		*lst = (*lst)->prev;
-	if ((*lst)->rank < -precision)
-	{
-		if (!(tmp = dl_lstnew(0, 1, (*lst)->base, NULL)))
-			error_func_free(EMPTY_PTR, lst, &tmp, NULL);
-		dl_lstdel(*lst);
-		*lst = tmp;
-		return ;
-	}
-	while ((*lst)->rank >= -precision && (*lst)->next)
-		*lst = (*lst)->next;
-	if ((*lst)->rank >= -precision)
-		return ;
-	tmp = *lst;
-	*lst = (*lst)->prev;
-	if (tmp->rank == -precision - 1)
-		if ((tmp->nbr) >= tmp->base / 2)
-			long_math_sum_add_rest(tmp, 1);
-}
 
 static void	kill_cur_node_go_next(t_dl_lst **lst)
 {
