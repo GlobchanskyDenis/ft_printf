@@ -6,7 +6,7 @@
 #    By: kirill <kirill@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/08 23:08:59 by kirill            #+#    #+#              #
-#    Updated: 2019/08/14 22:08:46 by kirill           ###   ########.fr        #
+#    Updated: 2019/08/14 22:26:40 by kirill           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ $(NAME): $(OBJS)
 
 $(DIR_O)/%.o: %.c
 	@mkdir -p temporary
-	@$(CC) $(HEADER) $(FLAGS) -o $@ -c $<
+	@$(CC) $(HEADER) $(CFLAGS) -o $@ -c $<
 
 build: $(BIN)
 
