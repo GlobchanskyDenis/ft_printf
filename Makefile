@@ -6,7 +6,7 @@
 #    By: kirill <kirill@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/08 23:08:59 by kirill            #+#    #+#              #
-#    Updated: 2019/08/14 22:33:52 by kirill           ###   ########.fr        #
+#    Updated: 2019/08/15 00:33:56 by kirill           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,9 @@ BIN=$(addprefix $(BIN_DIR)/,$(BIN_NAME))
 CC=gcc
 
 CFLAGS=-Wall -Wextra -Werror
+ifdef dbg
+	CFLAGS += -g
+endif
 
 LIBFT = libft
 
