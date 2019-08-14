@@ -92,6 +92,7 @@ int				ft_float_type(t_printf *tprint);
 
 void			ft_init_table(t_func *table);
 
+/*	---- Denis functions ------ */
 t_dl_lst		*dl_lstnew(char nbr, int rank, char base,
 		t_dl_lst *prev);
 void			dl_lstdel(t_dl_lst *lst);

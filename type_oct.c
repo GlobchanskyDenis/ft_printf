@@ -6,7 +6,7 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:07:38 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/13 16:21:25 by bsabre-c         ###   ########.fr       */
+/*   Updated: 2019/08/13 00:17:17 by kirill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static int				ft_gen_oct(unsigned long long in, t_printf *tprint)
 	len = ft_strlen(digit);
 	len = (tprint->flag & F_PREC && len < tprint->prec) ? tprint->prec : len;
 	filler = ft_strnew(len > tprint->width ? len : tprint->width);
+
 	ft_strdel(&digit);
 	ft_strdel(&filler);
 	return (len);

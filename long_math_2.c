@@ -6,36 +6,11 @@
 /*   By: bsabre-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 13:33:58 by bsabre-c          #+#    #+#             */
-/*   Updated: 2019/08/14 13:37:54 by bsabre-c         ###   ########.fr       */
+/*   Updated: 2019/08/13 15:57:05 by bsabre-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-/*
-void		print_list(t_dl_lst *lst)
-{
-	int			rank;
-
-	while (lst->prev)
-		lst = lst->prev;
-	rank = lst->rank;
-	while (lst)
-	{
-		if (rank == lst->rank)
-		{
-			ft_putnbr((int)lst->nbr);
-			lst = lst->next;
-		}
-		else if (rank == 0)
-			ft_putchar('.');
-		else
-			ft_putchar('0');
-		rank--;
-	}
-	ft_putchar('\n');
-}
-*/
 
 static void	kill_cur_node_go_next(t_dl_lst **lst)
 {
