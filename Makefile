@@ -6,7 +6,7 @@
 #    By: kirill <kirill@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/08 23:08:59 by kirill            #+#    #+#              #
-#    Updated: 2019/08/13 15:58:09 by bsabre-c         ###   ########.fr        #
+#    Updated: 2019/08/14 22:08:46 by kirill           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,7 @@ build: $(BIN)
 $(BIN): $(NAME) main.c
 	@echo "compiling binary with main.c to /bin/out"
 	@mkdir -p bin
-	@$(CC) $(FLAGS) main.c -L. -lftprintf -o $(BIN)
+	@$(CC) $(FLAGS) $(HEADER) main.c -L. -lftprintf -o $(BIN)
 
 clean:
 	@echo "Removing objects"

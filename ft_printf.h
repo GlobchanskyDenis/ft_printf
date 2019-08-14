@@ -6,7 +6,7 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 17:32:31 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/13 15:59:46 by bsabre-c         ###   ########.fr       */
+/*   Updated: 2019/08/14 21:51:07 by kirill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdarg.h>
 # include <wchar.h>
-# include "libft/libft.h"
+# include "libft.h"
 
 # define STANDART_PRECISION 6
 # define TYPE_NUM	11
