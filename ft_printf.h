@@ -6,7 +6,7 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 17:32:31 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/14 21:51:07 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/15 18:55:39 by bsabre-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,10 @@ void			error_func_free_lst(char *message, t_dl_lst **lst1,
 		t_dl_lst **lst2, t_dl_lst **lst3);
 void			*error_return_null_free(t_dl_lst **lst1,
 		t_dl_lst **lst2, t_dl_lst **lst3, char *str);
+char			*nan_inf(long double ld, t_printf *tprint);
 
 char			*turn_flpoint_to_str(long double ld, char base,
-		t_printf tprintf);
+		t_printf *tprintf);
 int				long_math_strlen(t_dl_lst *lst, t_printf *tprintf, t_sem sem);
 char			*turn_dl_lst_to_str(t_dl_lst *lst, t_printf tprintf,
 		t_sem sem);

@@ -6,11 +6,28 @@
 /*   By: bsabre-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 12:42:18 by bsabre-c          #+#    #+#             */
-/*   Updated: 2019/08/11 13:53:06 by bsabre-c         ###   ########.fr       */
+/*   Updated: 2019/08/15 19:50:29 by bsabre-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+void			printbits(size_t nbr, int bit)
+{
+	while (bit >= 0)
+	{
+		if (nbr & (size_t)1 << bit)
+			ft_putchar('1');
+		else
+			ft_putchar('0');
+		if (!(bit % 10))
+			ft_putchar('_');
+		bit--;
+	}
+	ft_putchar(' ');
+}
+*/
 
 int				long_math_strlen(t_dl_lst *lst, t_printf *tprintf, t_sem sem)
 {
@@ -83,7 +100,7 @@ static int		fill_sem(t_sem *sem, void *void_ptr, char base)
 }
 
 char			*turn_flpoint_to_str(long double ld, char base,
-		t_printf tprintf)
+		t_printf *tprintf)
 {
 	t_sem			sem;
 	t_dl_lst		*nbr_lst;
@@ -94,6 +111,8 @@ char			*turn_flpoint_to_str(long double ld, char base,
 	if (base > 16 || base < 2)
 		error_func_free(WRONG_VAL, NULL, NULL, NULL);
 	bit = 63;
+	if (ld != ld || (ld != 0 && ld == ld * 10))
+		return (nan_inf(ld, tprintf));
 	rank = fill_sem(&sem, &ld, base);
 	nbr_lst = NULL;
 	if (ld != 0)
@@ -103,6 +122,6 @@ char			*turn_flpoint_to_str(long double ld, char base,
 		if (!(nbr_lst = dl_lstnew(0, 1, base, NULL)))
 			error_func_free(EMPTY_PTR, &nbr_lst, NULL, NULL);
 	}
-	dst = turn_dl_lst_to_str(nbr_lst, tprintf, sem);
+	dst = turn_dl_lst_to_str(nbr_lst, *tprintf, sem);
 	return (dst);
 }

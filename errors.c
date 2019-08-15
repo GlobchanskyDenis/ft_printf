@@ -6,7 +6,7 @@
 /*   By: bsabre-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 15:10:20 by bsabre-c          #+#    #+#             */
-/*   Updated: 2019/08/02 18:50:05 by bsabre-c         ###   ########.fr       */
+/*   Updated: 2019/08/15 18:54:17 by bsabre-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,18 @@ void	*error_return_null_free(t_dl_lst **lst1, t_dl_lst **lst2,
 	if (str)
 		ft_strdel(&str);
 	return (NULL);
+}
+
+char	*nan_inf(long double ld, t_printf *tprint)
+{
+	if (ld != ld)
+	{
+		tprint->flag &= ~(F_ZERO | F_SPACE);
+		return (ft_strcpy(ft_strnew(3), "nan"));
+	}
+	if (ld < 0)
+	{
+		return (ft_strcpy(ft_strnew(4), "-inf"));
+	}
+	return (ft_strcpy(ft_strnew(3), "inf"));
 }
