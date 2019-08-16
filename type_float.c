@@ -6,7 +6,7 @@
 /*   By: bsabre-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 11:30:33 by bsabre-c          #+#    #+#             */
-/*   Updated: 2019/08/15 15:07:00 by bsabre-c         ###   ########.fr       */
+/*   Updated: 2019/08/16 11:41:56 by bsabre-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ int			ft_float_type(t_printf *tprint)
 		error_func_free(EMPTY_PTR, NULL, NULL, out);
 	if (tprint->width <= (len = ft_strlen(out)))
 	{
-		if (tprint->flag & F_SPACE && *out != '-' && \
-				*out != '+' && tprint->printed++)
+		if (tprint->flag & F_SPACE && *out != '-' && *out != '+' && \
+				++(tprint->printed))
 			write(1, " ", 1);
 		write(1, out, len);
 		tprint->printed += len;
