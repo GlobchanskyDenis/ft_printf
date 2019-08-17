@@ -6,7 +6,7 @@
 #    By: forange- <forange-@student.fr.42>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/26 16:00:22 by bsabre-c          #+#    #+#              #
-#    Updated: 2019/08/11 11:18:05 by bsabre-c         ###   ########.fr        #
+#    Updated: 2019/08/17 23:23:21 by forange-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ OBJECTS =	ft_absi.o		ft_absll.o		ft_atoi.o		ft_atoll.o		\
 			ft_list_bublesort.o		ft_list_murgesort.o		ft_wstrlen.o	\
 			ft_putwchar_fd.o 		ft_putwstrn_fd.o		ft_strupr.o		\
 			ft_ulltoa_base.o		ft_putchar_fd_smpl.o	ft_lltoa_base.o	\
-			ft_sqr_int.o			ft_sqr_ll.o				ft_sqr_szt.o
+			ft_sqr_int.o			ft_sqr_ll.o				ft_sqr_szt.o	\
+			ft_strnewc.o
 
 
 FILES = 	ft_absi.c		ft_absll.c		ft_atoi.c		ft_atoll.c		\
@@ -54,7 +55,8 @@ FILES = 	ft_absi.c		ft_absll.c		ft_atoi.c		ft_atoll.c		\
 			ft_list_bublesort.c		ft_list_murgesort.c 	ft_wstrlen.c	\
 			ft_putwchar_fd.c		ft_putwstrn_fd.c		ft_strupr.c		\
 			ft_ulltoa_base.c		ft_putchar_fd_smpl.c	ft_lltoa_base.c	\
-			ft_sqr_int.c			ft_sqr_ll.c				ft_sqr_szt.c
+			ft_sqr_int.c			ft_sqr_ll.c				ft_sqr_szt.c	\
+			ft_strnewc.c
 
 $(NAME) :
 	gcc $(FLAGS) $(FILES)

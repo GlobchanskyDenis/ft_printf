@@ -3,40 +3,75 @@
 /*                                                        :::      ::::::::   */
 /*   type_hex.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
+/*   By: forange- <forange-@student.fr.42>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 17:35:04 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/13 00:14:50 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/18 00:22:13 by forange-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int				ft_gen_hex(unsigned long long in, t_printf *tprint)
+static char			*gen_help(t_printf *tprint, int len, unsigned long long in)
 {
-	char				*filler;
-	char				*digit;
-	int					len;
+	char			*out;
+	char			*temp;
+	char			*prefix;
 
-	digit = ft_strjoin(tprint->flag & F_HASH ? "0x" : "", \
-						(filler = ft_ulltoa_base(in, 16)));
-	free(filler);
-	if (tprint->flag & F_UP)
-		ft_strupr(digit);
-	len = ft_strlen(digit);
-	len = (tprint->flag & F_PREC && len < tprint->prec) ? tprint->prec : len;
-	filler = ft_strnew(len > tprint->width ? len : tprint->width);
-	ft_strdel(&digit);
-	ft_strdel(&filler);
-	return (len);
+	prefix = NULL;
+	temp = NULL;
+	out = NULL;
+	tprint->flag & F_PREC && len > tprint->prec ? tprint->flag &= ~F_ZERO : 0;
+	if (tprint->flag & F_HASH && in)
+		prefix = ft_strdup("0x");
+	if (tprint->flag & F_ZERO)
+		temp = ft_strnewc(tprint->prec - len, '0');
+	if (prefix && temp)
+		out = ft_strjoin(prefix, temp);
+	if (out)
+	{
+		free(prefix);
+		free(temp);
+		return (out);
+	}
+	return (prefix ? prefix : temp);
 }
 
-int						ft_hex_type(t_printf *tprint)
+static int			ft_gen_hex(unsigned long long in, t_printf *tprint)
+{
+	char			*filler;
+	char			*prefix;
+	char			*out;
+	int				len;
+
+	filler = ft_ulltoa_base(in, 16);
+	prefix = gen_help(tprint, ft_strlen(filler), in);
+	out = ft_strjoin(prefix ? prefix : "", filler);
+	ft_strdel(&prefix);
+	ft_strdel(&filler);
+	if (tprint->flag & F_UP)
+		ft_strupr(out);
+	if ((len = ft_strlen(out)) >= tprint->width)
+		write(tprint->fd, out, len);
+	else
+	{
+		filler = ft_strnewc(tprint->width, ' ');
+		if (tprint->flag & F_MINUS)
+			ft_memcpy(filler, out, len);
+		else
+			ft_strcpy(filler + tprint->width - len, out);
+		write(tprint->fd, filler, tprint->width);
+		ft_strdel(&filler);
+	}
+	return (len > tprint->width ? len : tprint->width);
+}
+
+int					ft_hex_type(t_printf *tprint)
 {
 	unsigned long long	out;
 
 	tprint->str++;
-	tprint->flag & (F_PREC | F_ZERO) ? tprint->flag &= ~F_ZERO : 0;
+//	tprint->flag & (F_PREC | F_ZERO) ? tprint->flag &= ~F_ZERO : 0;
 	if (tprint->flag & F_PREC && !tprint->prec && !tprint->width)
 		return (0);
 	if (tprint->flag & L_HH)
@@ -52,7 +87,7 @@ int						ft_hex_type(t_printf *tprint)
 	return (ft_gen_hex(out, tprint));
 }
 
-int						ft_bhex_type(t_printf *tprint)
+int					ft_bhex_type(t_printf *tprint)
 {
 	tprint->flag |= F_UP;
 	return (ft_hex_type(tprint));

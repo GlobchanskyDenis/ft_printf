@@ -6,7 +6,7 @@
 /*   By: forange- <forange-@student.fr.42>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:34:29 by bsabre-c          #+#    #+#             */
-/*   Updated: 2019/08/10 17:34:40 by forange-         ###   ########.fr       */
+/*   Updated: 2019/08/17 22:32:46 by forange-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,5 @@ void				ft_strupr(char *str);
 char				*ft_ulltoa_base(unsigned long long dgt, int base);
 char				*ft_lltoa_base(long long dgt, int base);
 void				ft_putchar_fd_smpl(char c, int fd);
+char				*ft_strnewc(size_t size, char c);
 #endif

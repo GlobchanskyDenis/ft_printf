@@ -6,7 +6,7 @@
 /*   By: forange- <forange-@student.fr.42>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 17:17:29 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/10 17:26:49 by forange-         ###   ########.fr       */
+/*   Updated: 2019/08/18 00:32:04 by forange-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@ char			*ft_lltoa_base(long long dgt, int base)
 	i = 0;
 	if (base < 2 && base > 16)
 		return (NULL);
+	if (!dgt)
+		return (ft_strdup("0"));
 	temp = ft_absll(dgt);
 	while (temp)
 	{
 		temp /= base;
 		i++;
 	}
-	out = (char*)malloc(i + (dgt < 0 ? 2 : 1));
-	out[i] = '\0';
+	out = (char*)ft_memalloc(i + (dgt < 0 ? 2 : 1));
 	out[0] = dgt < 0 ? '-' : 0;
 	dgt = ft_absll(dgt);
 	while (dgt)

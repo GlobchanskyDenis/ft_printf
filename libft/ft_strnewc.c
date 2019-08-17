@@ -1,41 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ulltoa_base.c                                   :+:      :+:    :+:   */
+/*   ft_strnewc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: forange- <forange-@student.fr.42>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/10 17:12:16 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/17 23:42:25 by forange-         ###   ########.fr       */
+/*   Created: 2019/08/17 22:31:11 by forange-          #+#    #+#             */
+/*   Updated: 2019/08/17 23:48:44 by forange-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char					*ft_ulltoa_base(unsigned long long dgt, int base)
+char	*ft_strnewc(size_t size, char c)
 {
-	unsigned long long	temp;
-	int					i;
-	char				*out;
+	char	*dst;
+	size_t	i;
 
-	i = 0;
-	if (base < 2 && base > 16)
+	if (size + 1 < size)
 		return (NULL);
-	if (!dgt)
-		return (ft_strdup("0"));
-	temp = dgt;
-	while (temp)
+	i = 0;
+	if (!(dst = (char *)malloc(size + 1)))
+		return (NULL);
+	while (i < size)
 	{
-		temp /= base;
+		dst[i] = c;
 		i++;
 	}
-	out = (char*)malloc(i + 1);
-	out[i] = '\0';
-	while (dgt)
-	{
-		temp = dgt % base;
-		out[--i] = (temp > 9) ? (temp - 10) + 'a' : temp + '0';
-		dgt /= base;
-	}
-	return (out);
+	dst[i] = '\0';
+	return (dst);
 }
