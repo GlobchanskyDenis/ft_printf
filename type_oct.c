@@ -6,7 +6,7 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:07:38 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/18 17:34:26 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/18 17:44:29 by kirill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ int					ft_oct_type(t_printf *tprint)
 	tprint->str++;
 	tprint->flag & F_PREC && tprint->flag & F_ZERO ? \
 		tprint->flag &= ~F_ZERO : 0;
-//	if (tprint->flag & F_PREC && !tprint->prec && !tprint->width)
-//		return (0);
 	if (tprint->flag & L_HH)
 		out = (unsigned char)va_arg(tprint->args, int);
 	else if (tprint->flag & L_H)

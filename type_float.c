@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_float.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsabre-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 11:30:33 by bsabre-c          #+#    #+#             */
-/*   Updated: 2019/08/16 11:41:56 by bsabre-c         ###   ########.fr       */
+/*   Updated: 2019/08/18 17:53:20 by kirill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static void	print_align_left(t_printf *tprint, char *out, int len)
 	space = tprint->width - len;
 	tprint->printed += tprint->width;
 	if (tprint->flag & F_SPACE && *out != '-' && *out != '+' && space--)
-		write(1, " ", 1);
-	write(1, out, len);
+		write(tprint->fd, " ", 1);
+	write(tprint->fd, out, len);
 	while (space--)
-		write(1, " ", 1);
+		write(tprint->fd, " ", 1);
 }
 
 static void	print_align_right(t_printf *tprint, char *out, int len)
@@ -38,18 +38,18 @@ static void	print_align_right(t_printf *tprint, char *out, int len)
 	if (tprint->flag & F_ZERO)
 	{
 		if (tprint->flag & F_SPACE && *out != '-' && *out != '+' && space--)
-			write(1, " ", 1);
+			write(tprint->fd, " ", 1);
 		if (*out == '-' || *out == '+')
-			write(1, out++, 1);
+			write(tprint->fd, out++, 1);
 		while (space--)
-			write(1, "0", 1);
-		write(1, out, len);
+			write(tprint->fd, "0", 1);
+		write(tprint->fd, out, len);
 	}
 	else
 	{
 		while (space--)
-			write(1, " ", 1);
-		write(1, out, len);
+			write(tprint->fd, " ", 1);
+		write(tprint->fd, out, len);
 	}
 }
 
@@ -70,8 +70,8 @@ int			ft_float_type(t_printf *tprint)
 	{
 		if (tprint->flag & F_SPACE && *out != '-' && *out != '+' && \
 				++(tprint->printed))
-			write(1, " ", 1);
-		write(1, out, len);
+			write(tprint->fd, " ", 1);
+		write(tprint->fd, out, len);
 		tprint->printed += len;
 	}
 	else

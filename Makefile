@@ -6,7 +6,7 @@
 #    By: kirill <kirill@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/08 23:08:59 by kirill            #+#    #+#              #
-#    Updated: 2019/08/18 14:47:34 by kirill           ###   ########.fr        #
+#    Updated: 2019/08/18 18:00:52 by kirill           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,26 +31,27 @@ DIR_O = temporary
 
 HEADER = -I./$(LIBFT)
 
-SOURCES = 	bonus.c					\
-			dl_list.c				\
-			errors.c				\
-			ft_printf.c				\
-			long_math_1.c			\
-			long_math_2.c			\
-			long_math_round_up.c	\
-			long_math_mult.c		\
-			long_math_sqr.c			\
-			long_math_sum.c			\
-			long_math_sum2.c		\
-			parser.c				\
-			table.c					\
-			type_chr.c				\
-			type_float.c			\
-			type_handlers.c			\
-			type_hex.c				\
-			type_oct.c				\
-			type_ptr.c				\
-			type_str.c
+SOURCES = 	bonus.c \
+			dl_list.c \
+			errors.c \
+			ft_printf.c \
+			long_math_1.c \
+			long_math_2.c \
+			long_math_mult.c \
+			long_math_round_up.c \
+			long_math_sqr.c \
+			long_math_sum.c \
+			long_math_sum2.c \
+			parser.c \
+			table.c \
+			type_chr.c \
+			type_float.c \
+			type_hex.c \
+			type_int.c \
+			type_oct.c \
+			type_ptr.c \
+			type_str.c \
+			type_uint.c
 
 OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 
