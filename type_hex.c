@@ -6,7 +6,7 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 17:35:04 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/18 14:00:49 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/18 16:28:06 by kirill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static char			*gen_help(t_printf *tprint, int len, unsigned long long in)
 		prefix = ft_strdup("0x");
 		len += 2;
 	}
-	if (tprint->flag & F_PREC && tprint->prec > len)
-		temp = ft_strnewc(tprint->prec - len, '0');
+	if (tprint->flag & F_PREC && tprint->prec > (prefix ? len - 2 : len))
+		temp = ft_strnewc(tprint->prec - (prefix ? len - 2 : len), '0');
 	else if (tprint->flag & F_ZERO && tprint->width > len)
 		temp = ft_strnewc(tprint->width - len, '0');
 	if (prefix && temp)
@@ -81,8 +81,8 @@ int					ft_hex_type(t_printf *tprint)
 	tprint->str++;
 	tprint->flag & F_PREC && tprint->flag & F_ZERO ? \
 		tprint->flag &= ~F_ZERO : 0;
-	if (tprint->flag & F_PREC && !tprint->prec && !tprint->width)
-		return (0);
+//	if (tprint->flag & F_PREC && !tprint->prec && !tprint->width)
+//		return (0);
 	if (tprint->flag & L_HH)
 		out = (unsigned char)va_arg(tprint->args, int);
 	else if (tprint->flag & L_H)

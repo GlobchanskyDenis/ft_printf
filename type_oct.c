@@ -6,7 +6,7 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:07:38 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/18 14:13:00 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/18 17:34:26 by kirill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int			ft_gen_oct(unsigned long long in, t_printf *tprint)
 	char			*out;
 	int				len;
 
-	if (!in && tprint->flag & F_PREC && !tprint->prec)
+	if (!in && tprint->flag & F_PREC && !tprint->prec && !(tprint->flag & F_HASH))
 		filler = ft_strdup("");
 	else
 		filler = ft_ulltoa_base(in, 8);
@@ -57,8 +57,6 @@ static int			ft_gen_oct(unsigned long long in, t_printf *tprint)
 	out = ft_strjoin(prefix ? prefix : "", filler);
 	ft_strdel(&prefix);
 	ft_strdel(&filler);
-	if (tprint->flag & F_UP)
-		ft_strupr(out);
 	if ((len = ft_strlen(out)) >= tprint->width)
 		write(tprint->fd, out, len);
 	else
@@ -81,8 +79,8 @@ int					ft_oct_type(t_printf *tprint)
 	tprint->str++;
 	tprint->flag & F_PREC && tprint->flag & F_ZERO ? \
 		tprint->flag &= ~F_ZERO : 0;
-	if (tprint->flag & F_PREC && !tprint->prec && !tprint->width)
-		return (0);
+//	if (tprint->flag & F_PREC && !tprint->prec && !tprint->width)
+//		return (0);
 	if (tprint->flag & L_HH)
 		out = (unsigned char)va_arg(tprint->args, int);
 	else if (tprint->flag & L_H)

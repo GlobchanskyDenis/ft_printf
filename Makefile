@@ -6,7 +6,7 @@
 #    By: kirill <kirill@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/08 23:08:59 by kirill            #+#    #+#              #
-#    Updated: 2019/08/15 00:33:56 by kirill           ###   ########.fr        #
+#    Updated: 2019/08/18 14:47:34 by kirill           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SOURCES = 	bonus.c					\
 			type_handlers.c			\
 			type_hex.c				\
 			type_oct.c				\
+			type_ptr.c				\
 			type_str.c
 
 OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
