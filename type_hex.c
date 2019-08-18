@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_hex.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: forange- <forange-@student.fr.42>          +#+  +:+       +#+        */
+/*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 17:35:04 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/18 00:22:13 by forange-         ###   ########.fr       */
+/*   Updated: 2019/08/18 14:00:49 by kirill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,14 @@ static char			*gen_help(t_printf *tprint, int len, unsigned long long in)
 	out = NULL;
 	tprint->flag & F_PREC && len > tprint->prec ? tprint->flag &= ~F_ZERO : 0;
 	if (tprint->flag & F_HASH && in)
+	{
 		prefix = ft_strdup("0x");
-	if (tprint->flag & F_ZERO)
+		len += 2;
+	}
+	if (tprint->flag & F_PREC && tprint->prec > len)
 		temp = ft_strnewc(tprint->prec - len, '0');
+	else if (tprint->flag & F_ZERO && tprint->width > len)
+		temp = ft_strnewc(tprint->width - len, '0');
 	if (prefix && temp)
 		out = ft_strjoin(prefix, temp);
 	if (out)
@@ -44,7 +49,10 @@ static int			ft_gen_hex(unsigned long long in, t_printf *tprint)
 	char			*out;
 	int				len;
 
-	filler = ft_ulltoa_base(in, 16);
+	if (!in && tprint->flag & F_PREC && !tprint->prec)
+		filler = ft_strdup("");
+	else
+		filler = ft_ulltoa_base(in, 16);
 	prefix = gen_help(tprint, ft_strlen(filler), in);
 	out = ft_strjoin(prefix ? prefix : "", filler);
 	ft_strdel(&prefix);
@@ -71,7 +79,8 @@ int					ft_hex_type(t_printf *tprint)
 	unsigned long long	out;
 
 	tprint->str++;
-//	tprint->flag & (F_PREC | F_ZERO) ? tprint->flag &= ~F_ZERO : 0;
+	tprint->flag & F_PREC && tprint->flag & F_ZERO ? \
+		tprint->flag &= ~F_ZERO : 0;
 	if (tprint->flag & F_PREC && !tprint->prec && !tprint->width)
 		return (0);
 	if (tprint->flag & L_HH)

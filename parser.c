@@ -6,7 +6,7 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 18:35:35 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/11 20:03:46 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/18 12:08:43 by kirill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	parse_lenght(t_printf *tprint)
 {
 	if (*tprint->str == 'h')
 	{
-		if (*tprint->str == 'h')
+		if (*(tprint->str + 1) == 'h')
 			tprint->flag |= L_HH;
 		else
 			tprint->flag |= L_H;
