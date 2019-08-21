@@ -6,11 +6,20 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 17:51:13 by kirill            #+#    #+#             */
-/*   Updated: 2019/08/18 21:19:03 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/21 22:17:22 by kirill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static void			ft_swap(char *a, char *b)
+{
+	char t;
+
+	t = *a;
+	*a = *b;
+	*b = t;
+}
 
 static char			*gen_help(t_printf *tprint, int len, long long in)
 {
@@ -27,8 +36,8 @@ static char			*gen_help(t_printf *tprint, int len, long long in)
 		prefix = ft_strdup(tprint->flag & F_PLUS ? "+" : " ");
 		len += 1;
 	}
-	if (tprint->flag & F_PREC && tprint->prec > (prefix ? len - 1 : len))
-		temp = ft_strnewc(tprint->prec - (prefix ? len - 1 : len), '0');
+	if (tprint->flag & F_PREC && tprint->prec > (prefix || in < 0 ? len - 1 : len))
+		temp = ft_strnewc(tprint->prec - (prefix || in < 0 ? len - 1 : len), '0');
 	else if (tprint->flag & F_ZERO && tprint->width > len)
 		temp = ft_strnewc(tprint->width - len, '0');
 	if (prefix && temp)
@@ -57,6 +66,7 @@ static int	ft_gen_int(long long in, t_printf *tprint)
 	out = ft_strjoin(prefix ? prefix : "", filler);
 	ft_strdel(&prefix);
 	ft_strdel(&filler);
+	ft_swap(&out[0], (prefix = ft_strchr(out, '-')) ? prefix : &out[0]);
 	if ((len = ft_strlen(out)) >= tprint->width)
 		write(tprint->fd, out, len);
 	else
@@ -69,6 +79,7 @@ static int	ft_gen_int(long long in, t_printf *tprint)
 		write(tprint->fd, filler, tprint->width);
 		ft_strdel(&filler);
 	}
+	ft_strdel(&out);
 	return (len > tprint->width ? len : tprint->width);
 }
 

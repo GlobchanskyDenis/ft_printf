@@ -6,7 +6,7 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:07:38 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/18 17:44:29 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/19 22:22:50 by kirill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static int			ft_gen_oct(unsigned long long in, t_printf *tprint)
 		write(tprint->fd, filler, tprint->width);
 		ft_strdel(&filler);
 	}
+	ft_strdel(&out);
 	return (len > tprint->width ? len : tprint->width);
 }
 

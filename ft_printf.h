@@ -6,7 +6,7 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 17:32:31 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/15 18:55:39 by bsabre-c         ###   ########.fr       */
+/*   Updated: 2019/08/22 00:30:35 by kirill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "libft.h"
 
 # define STANDART_PRECISION 6
-# define TYPE_NUM	11
+# define TYPE_NUM	12
 # define F_MINUS	(1 << 0)
 # define F_PLUS		(1 << 1)
 # define F_SPACE	(1 << 2)
@@ -89,6 +89,7 @@ int				ft_unsgn_type(t_printf *tprint);
 int				ft_hex_type(t_printf *tprint);
 int				ft_bhex_type(t_printf *tprint);
 int				ft_float_type(t_printf *tprint);
+int				ft_bfloat_type(t_printf *tprint);
 
 void			ft_init_table(t_func *table);
 

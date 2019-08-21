@@ -6,7 +6,7 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 11:30:33 by bsabre-c          #+#    #+#             */
-/*   Updated: 2019/08/18 17:53:20 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/22 00:30:26 by kirill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,10 @@ int			ft_float_type(t_printf *tprint)
 			(print_align_right(tprint, out, len));
 	ft_strdel(&out);
 	return (0);
+}
+
+int			ft_bfloat_type(t_printf *tprint)
+{
+	tprint->flag |= F_UP;
+	return (ft_float_type(tprint));
 }

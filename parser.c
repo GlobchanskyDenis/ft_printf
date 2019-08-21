@@ -6,7 +6,7 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 18:35:35 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/18 12:08:43 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/22 01:47:29 by kirill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,26 @@ static void	parse_flags(t_printf *tprint)
 static void	parse_width(t_printf *tprint)
 {
 	tprint->width = 0;
-	if (*tprint->str == '*')
+	if (ft_isdigit(*tprint->str))
+	{
+		tprint->width = ft_atoi(tprint->str);
+		while (ft_isdigit(*tprint->str))
+			tprint->str++;
+	}
+	else if (*tprint->str == '*')
 	{
 		tprint->width = va_arg(tprint->args, int);
 		tprint->str++;
-		return ;
 	}
-	if (ft_isdigit(*tprint->str))
-		tprint->width = ft_atoi(tprint->str);
-	while (ft_isdigit(*tprint->str))
-		tprint->str++;
+	if (tprint->width < 0)
+	{
+		tprint->flag & F_ZERO ? tprint->flag &= ~F_ZERO : 0;
+		tprint->flag |= F_MINUS;
+	}
+	tprint->width = ft_absi(tprint->width);
+	if (tprint->width < 0)
+		tprint->printed = -1;
+	return ;
 }
 
 static void	parse_prec(t_printf *tprint)
@@ -55,17 +65,21 @@ static void	parse_prec(t_printf *tprint)
 	{
 		tprint->flag |= F_PREC;
 		tprint->str++;
-		if (*tprint->str == '*')
+		if (ft_isdigit(*tprint->str))
+		{
+			tprint->prec = ft_atoi(tprint->str);
+			while (ft_isdigit(*tprint->str))
+				tprint->str++;
+		}
+		else if (*tprint->str == '*')
 		{
 			tprint->prec = va_arg(tprint->args, int);
 			tprint->str++;
-			return ;
 		}
-		if (ft_isdigit(*tprint->str))
-			tprint->prec = ft_atoi(tprint->str);
-		while (ft_isdigit(*tprint->str))
-			tprint->str++;
+		if (tprint->prec < 0)
+			tprint->flag &= ~F_PREC;
 	}
+	return ;
 }
 
 static void	parse_lenght(t_printf *tprint)
@@ -100,11 +114,11 @@ int			parse_format(t_printf *tprint, t_func f_table[])
 	parse_prec(tprint);
 	parse_lenght(tprint);
 	parse_base(tprint);
-	while (i < TYPE_NUM)
+	while (i < TYPE_NUM && tprint->printed >= 0)
 	{
 		if (*tprint->str == f_table[i].ch)
-			return (f_table[i].func(tprint));
+			return ((tprint->printed += f_table[i].func(tprint)));
 		i++;
 	}
-	return (0);
+	return (tprint->printed < 0 ? -1 : 0);
 }

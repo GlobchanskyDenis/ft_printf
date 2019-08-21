@@ -6,7 +6,7 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 17:25:32 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/18 20:27:46 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/19 22:21:38 by kirill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static int	ft_gen_unsgn(unsigned long long in, t_printf *tprint)
 		write(tprint->fd, filler, tprint->width);
 		ft_strdel(&filler);
 	}
+	ft_strdel(&out);
 	return (len > tprint->width ? len : tprint->width);
 }
 

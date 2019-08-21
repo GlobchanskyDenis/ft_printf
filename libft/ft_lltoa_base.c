@@ -6,18 +6,18 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 17:17:29 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/18 21:33:05 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/21 22:31:17 by kirill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_lltoa_base(long long dgt, int base)
+char					*ft_lltoa_base(long long dgt, int base)
 {
-	long long	temp;
-	int			i;
-	char		*out;
-	int			is_neg;
+	unsigned long long	temp;
+	int					i;
+	char				*out;
+	int					is_neg;
 
 	i = 1;
 	is_neg = dgt < 0 ? 1 : 0;
@@ -30,12 +30,12 @@ char			*ft_lltoa_base(long long dgt, int base)
 		i++;
 	out = (char*)ft_memalloc(i + is_neg + 1);
 	out[0] = dgt < 0 ? '-' : 0;
-	dgt = ft_absll(dgt);
-	while (dgt)
+	temp = ft_absll(dgt);
+	while (temp)
 	{
-		temp = dgt % base;
-		out[--i + is_neg] = (temp > 9) ? (temp - 10) + 'a' : temp + '0';
-		dgt /= base;
+		dgt = temp % base;
+		out[--i + is_neg] = (dgt > 9) ? (dgt - 10) + 'a' : dgt + '0';
+		temp /= base;
 	}
 	return (out);
 }
