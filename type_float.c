@@ -6,7 +6,7 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 11:30:33 by bsabre-c          #+#    #+#             */
-/*   Updated: 2019/08/22 15:16:42 by bsabre-c         ###   ########.fr       */
+/*   Updated: 2019/08/22 20:04:52 by bsabre-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	print_align_right(t_printf *tprint, char *out, int len)
 	{
 		if (tprint->flag & F_SPACE && *out != '-' && *out != '+' && space--)
 			write(tprint->fd, " ", 1);
-		if (*out == '-' || *out == '+')
+		if ((*out == '-' || *out == '+') && len--)
 			write(tprint->fd, out++, 1);
 		while (space--)
 			write(tprint->fd, "0", 1);
