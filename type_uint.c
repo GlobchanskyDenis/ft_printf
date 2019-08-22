@@ -6,13 +6,13 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 17:25:32 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/19 22:21:38 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/22 11:46:32 by bsabre-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char			*gen_help(t_printf *tprint, int len)
+static char	*gen_help(t_printf *tprint, int len)
 {
 	char			*temp;
 
@@ -30,12 +30,10 @@ static int	ft_gen_unsgn(unsigned long long in, t_printf *tprint)
 	char	*filler;
 	char	*out;
 	char	*prefix;
-	int 	len;
+	int		len;
 
-	if (!in && tprint->flag & F_PREC && !tprint->prec)
-		filler = ft_strdup("");
-	else
-		filler = ft_ulltoa_base(in, 10);
+	(!in && tprint->flag & F_PREC && !tprint->prec) ? filler = ft_strdup("") : \
+		(filler = ft_ulltoa_base(in, 10));
 	prefix = gen_help(tprint, ft_strlen(filler));
 	out = ft_strjoin(prefix ? prefix : "", filler);
 	ft_strdel(&prefix);
@@ -45,9 +43,7 @@ static int	ft_gen_unsgn(unsigned long long in, t_printf *tprint)
 	else
 	{
 		filler = ft_strnewc(tprint->width, ' ');
-		if (tprint->flag & F_MINUS)
-			ft_memcpy(filler, out, len);
-		else
+		(tprint->flag & F_MINUS) ? ft_memcpy(filler, out, len) : \
 			ft_strcpy(filler + tprint->width - len, out);
 		write(tprint->fd, filler, tprint->width);
 		ft_strdel(&filler);

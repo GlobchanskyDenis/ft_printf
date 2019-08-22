@@ -6,28 +6,11 @@
 /*   By: bsabre-c <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 12:42:18 by bsabre-c          #+#    #+#             */
-/*   Updated: 2019/08/16 10:48:35 by bsabre-c         ###   ########.fr       */
+/*   Updated: 2019/08/22 11:22:39 by bsabre-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-/*
-void			printbits(size_t nbr, int bit)
-{
-	while (bit >= 0)
-	{
-		if (nbr & (size_t)1 << bit)
-			ft_putchar('1');
-		else
-			ft_putchar('0');
-		if (!(bit % 10))
-			ft_putchar('_');
-		bit--;
-	}
-	ft_putchar(' ');
-}
-*/
 
 int				long_math_strlen(t_dl_lst *lst, t_printf *tprintf, t_sem sem)
 {

@@ -6,7 +6,7 @@
 #    By: kirill <kirill@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/08 23:08:59 by kirill            #+#    #+#              #
-#    Updated: 2019/08/18 18:00:52 by kirill           ###   ########.fr        #
+#    Updated: 2019/08/22 11:17:44 by bsabre-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,6 +92,8 @@ fclean: clean
 	@echo "Done"
 	@echo "Removing binary"
 	@rm -rf $(BIN_DIR)
+	@rm -rf ./.DS_Store
+	@rm -rf ./$(LIBFT)/.DS_Store
 	@echo "Done"
 
 re: fclean all

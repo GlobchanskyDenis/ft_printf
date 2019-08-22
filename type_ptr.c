@@ -6,7 +6,7 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 14:45:11 by kirill            #+#    #+#             */
-/*   Updated: 2019/08/18 15:26:50 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/22 11:23:29 by bsabre-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	ft_gen_ptr(void *ptr, t_printf *tprint)
 
 int			ft_ptr_type(t_printf *tprint)
 {
-	void 	*var;
+	void	*var;
 
 	tprint->str++;
 	var = va_arg(tprint->args, void*);

@@ -6,7 +6,7 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 17:35:04 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/19 22:23:21 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/22 11:40:22 by bsabre-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,8 @@ static char			*gen_help(t_printf *tprint, int len, unsigned long long in)
 	temp = NULL;
 	out = NULL;
 	tprint->flag & F_PREC && len > tprint->prec ? tprint->flag &= ~F_ZERO : 0;
-	if (tprint->flag & F_HASH && in)
-	{
-		prefix = ft_strdup("0x");
+	if (tprint->flag & F_HASH && in && (prefix = ft_strdup("0x")))
 		len += 2;
-	}
 	if (tprint->flag & F_PREC && tprint->prec > (prefix ? len - 2 : len))
 		temp = ft_strnewc(tprint->prec - (prefix ? len - 2 : len), '0');
 	else if (tprint->flag & F_ZERO && tprint->width > len)
@@ -49,24 +46,19 @@ static int			ft_gen_hex(unsigned long long in, t_printf *tprint)
 	char			*out;
 	int				len;
 
-	if (!in && tprint->flag & F_PREC && !tprint->prec)
-		filler = ft_strdup("");
-	else
-		filler = ft_ulltoa_base(in, 16);
+	(!in && tprint->flag & F_PREC && !tprint->prec) ? filler = ft_strdup("") : \
+		(filler = ft_ulltoa_base(in, 16));
 	prefix = gen_help(tprint, ft_strlen(filler), in);
 	out = ft_strjoin(prefix ? prefix : "", filler);
 	ft_strdel(&prefix);
 	ft_strdel(&filler);
-	if (tprint->flag & F_UP)
-		ft_strupr(out);
+	(tprint->flag & F_UP) ? ft_strupr(out) : 1;
 	if ((len = ft_strlen(out)) >= tprint->width)
 		write(tprint->fd, out, len);
 	else
 	{
 		filler = ft_strnewc(tprint->width, ' ');
-		if (tprint->flag & F_MINUS)
-			ft_memcpy(filler, out, len);
-		else
+		(tprint->flag & F_MINUS) ? (ft_memcpy(filler, out, len)) : \
 			ft_strcpy(filler + tprint->width - len, out);
 		write(tprint->fd, filler, tprint->width);
 		ft_strdel(&filler);

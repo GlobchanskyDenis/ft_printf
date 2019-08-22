@@ -6,13 +6,13 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 17:51:13 by kirill            #+#    #+#             */
-/*   Updated: 2019/08/21 22:17:22 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/22 12:25:03 by bsabre-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void			ft_swap(char *a, char *b)
+static void	ft_swap(char *a, char *b)
 {
 	char t;
 
@@ -21,34 +21,31 @@ static void			ft_swap(char *a, char *b)
 	*b = t;
 }
 
-static char			*gen_help(t_printf *tprint, int len, long long in)
+static char	*gen_help(t_printf *tprint, int len, long long in)
 {
 	char			*temp;
-	char			*prefix;
+	char			*pre;
 	char			*out;
 
 	temp = NULL;
-	prefix = NULL;
+	pre = NULL;
 	out = NULL;
 	tprint->flag & F_PREC && len > tprint->prec ? tprint->flag &= ~F_ZERO : 0;
-	if (tprint->flag & (F_PLUS | F_SPACE) && in >= 0)
-	{
-		prefix = ft_strdup(tprint->flag & F_PLUS ? "+" : " ");
+	if ((tprint->flag & (F_PLUS | F_SPACE)) && (in >= 0) && \
+		(pre = ft_strdup(tprint->flag & F_PLUS ? "+" : " ")))
 		len += 1;
-	}
-	if (tprint->flag & F_PREC && tprint->prec > (prefix || in < 0 ? len - 1 : len))
-		temp = ft_strnewc(tprint->prec - (prefix || in < 0 ? len - 1 : len), '0');
+	if (tprint->flag & F_PREC && tprint->prec > (pre || in < 0 ? len - 1 : len))
+		temp = ft_strnewc(tprint->prec - (pre || in < 0 ? len - 1 : len), '0');
 	else if (tprint->flag & F_ZERO && tprint->width > len)
 		temp = ft_strnewc(tprint->width - len, '0');
-	if (prefix && temp)
-		out = ft_strjoin(prefix, temp);
+	(pre && temp) ? (out = ft_strjoin(pre, temp)) : "1";
 	if (out)
 	{
-		free(prefix);
+		free(pre);
 		free(temp);
 		return (out);
 	}
-	return (prefix ? prefix : temp);
+	return (pre ? pre : temp);
 }
 
 static int	ft_gen_int(long long in, t_printf *tprint)
@@ -56,12 +53,10 @@ static int	ft_gen_int(long long in, t_printf *tprint)
 	char	*filler;
 	char	*out;
 	char	*prefix;
-	int 	len;
+	int		len;
 
-	if (!in && tprint->flag & F_PREC && !tprint->prec)
-		filler = ft_strdup("");
-	else
-		filler = ft_lltoa_base(in, 10);
+	(!in && tprint->flag & F_PREC && !tprint->prec) ? filler = ft_strdup("") : \
+		(filler = ft_lltoa_base(in, 10));
 	prefix = gen_help(tprint, ft_strlen(filler), in);
 	out = ft_strjoin(prefix ? prefix : "", filler);
 	ft_strdel(&prefix);
@@ -72,9 +67,7 @@ static int	ft_gen_int(long long in, t_printf *tprint)
 	else
 	{
 		filler = ft_strnewc(tprint->width, ' ');
-		if (tprint->flag & F_MINUS)
-			ft_memcpy(filler, out, len);
-		else
+		(tprint->flag & F_MINUS) ? ft_memcpy(filler, out, len) : \
 			ft_strcpy(filler + tprint->width - len, out);
 		write(tprint->fd, filler, tprint->width);
 		ft_strdel(&filler);

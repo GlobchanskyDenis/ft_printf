@@ -6,7 +6,7 @@
 /*   By: forange- <forange-@student.fr.42>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 20:54:26 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/07 19:17:34 by forange-         ###   ########.fr       */
+/*   Updated: 2019/08/22 14:03:05 by bsabre-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	ft_wbytelen(const wchar_t *str)
 	while (*str)
 	{
 		if (*str < 0x80)
-	   		len += 1;
+			len += 1;
 		else if (*str < 0x800)
 			len += 2;
 		else if (*str < 0x10000)
@@ -32,15 +32,30 @@ static int	ft_wbytelen(const wchar_t *str)
 	return (len);
 }
 
+static void	ft_wstr_gen_helper(wchar_t *str, t_printf *tprint, int *char_len, \
+		int *byte_len)
+{
+	char	*filler;
+
+	filler = ft_strnew(tprint->width - *byte_len);
+	filler = (char *)ft_memset(filler, ' ', tprint->width - *byte_len);
+	if (tprint->flag & F_MINUS)
+	{
+		ft_putwstrn_fd(str, *char_len, tprint->fd);
+		write(tprint->fd, filler, tprint->width - *byte_len);
+	}
+	else
+	{
+		write(tprint->fd, filler, tprint->width - *byte_len);
+		write(tprint->fd, str, *byte_len);
+	}
+	ft_memdel((void **)&filler);
+}
+
 static int	ft_wstr_gen(wchar_t *str, t_printf *tprint)
 {
 	int		char_len;
 	int		byte_len;
-	char	*filler;
-
-	/*	Обрезавется побайтово, значит нужно просто использовать memmove
-	**	Не забыть, что ебаный юникод надо еще организовать через битовые сдвиги
-	*/
 
 	char_len = ft_wstrlen(str);
 	byte_len = ft_wbytelen(str);
@@ -49,22 +64,7 @@ static int	ft_wstr_gen(wchar_t *str, t_printf *tprint)
 	if (byte_len >= tprint->width)
 		ft_putwstrn_fd(str, char_len, tprint->fd);
 	else
-	{
-		filler = ft_strnew(tprint->width - byte_len);
-		filler = (char*)ft_memset(filler, ' ', tprint->width - byte_len);
-		if (tprint->flag & F_MINUS)
-		{
-			ft_putwstrn_fd(str, char_len, tprint->fd);
-			write(tprint->fd, filler, tprint->width - byte_len);
-		}
-		else
-		{
-			write(tprint->fd, filler, tprint->width - byte_len);
-			//ft_putwstrn_fd(str, char_len, tprint->fd);
-			write(tprint->fd, str, byte_len);
-		}
-		ft_memdel((void**)&filler);
-	}
+		ft_wstr_gen_helper(str, tprint, &char_len, &byte_len);
 	return (byte_len > tprint->width ? byte_len : tprint->width);
 }
 

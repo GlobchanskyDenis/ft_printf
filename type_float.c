@@ -6,7 +6,7 @@
 /*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 11:30:33 by bsabre-c          #+#    #+#             */
-/*   Updated: 2019/08/22 00:30:26 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/22 15:16:42 by bsabre-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,33 @@ static void	print_align_right(t_printf *tprint, char *out, int len)
 	}
 }
 
+static char	*prefix(char *src, t_printf *tprint)
+{
+	char		*dst;
+
+	if (!src || !tprint)
+		return (error_return_null_free(NULL, NULL, NULL, src));
+	if (tprint->base == 2)
+	{
+		dst = ft_strjoin("0b", src);
+		free(src);
+		return (dst);
+	}
+	else if (tprint->base == 8)
+	{
+		dst = ft_strjoin("0o", src);
+		free(src);
+		return (dst);
+	}
+	else if (tprint->base == 16)
+	{
+		dst = ft_strjoin("0x", src);
+		free(src);
+		return (dst);
+	}
+	return (src);
+}
+
 int			ft_float_type(t_printf *tprint)
 {
 	char		*out;
@@ -64,7 +91,7 @@ int			ft_float_type(t_printf *tprint)
 	tprint->str++;
 	(tprint->flag & L_BIGL) ? (ld = va_arg(tprint->args, long double)) : \
 			(ld = (long double)va_arg(tprint->args, double));
-	if (!(out = turn_flpoint_to_str(ld, tprint->base, tprint)))
+	if (!(out = prefix(turn_flpoint_to_str(ld, tprint->base, tprint), tprint)))
 		error_func_free(EMPTY_PTR, NULL, NULL, out);
 	if (tprint->width <= (len = ft_strlen(out)))
 	{
