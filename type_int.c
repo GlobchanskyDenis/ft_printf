@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_int.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
+/*   By: forange- <forange-@student.fr.42>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 17:51:13 by kirill            #+#    #+#             */
-/*   Updated: 2019/08/22 12:25:03 by bsabre-c         ###   ########.fr       */
+/*   Updated: 2019/08/22 20:19:04 by forange-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	ft_gen_int(long long in, t_printf *tprint)
 	int		len;
 
 	(!in && tprint->flag & F_PREC && !tprint->prec) ? filler = ft_strdup("") : \
-		(filler = ft_lltoa_base(in, 10));
+		(filler = ft_lltoa_base(in, tprint->base));
 	prefix = gen_help(tprint, ft_strlen(filler), in);
 	out = ft_strjoin(prefix ? prefix : "", filler);
 	ft_strdel(&prefix);
