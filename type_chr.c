@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_chr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
+/*   By: forange- <forange-@student.fr.42>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:07:46 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/21 23:26:34 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/22 19:38:50 by forange-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static int	ft_chr_gen(char c, t_printf *tprint)
 	char	*filler;
 
 	filler = ft_strnew(tprint->width);
-	filler = (char*)ft_memset(filler, ' ', tprint->width);
+	filler = (char*)ft_memset(filler, ((tprint->flag & F_ZERO && c == '%') ? \
+			'0' : ' '), tprint->width);
 	if (tprint->flag & F_MINUS)
 		filler[0] = c;
 	else

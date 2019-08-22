@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kirill <kirill@student.42.fr>              +#+  +:+       +#+        */
+/*   By: forange- <forange-@student.fr.42>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 18:35:35 by forange-          #+#    #+#             */
-/*   Updated: 2019/08/22 01:47:29 by kirill           ###   ########.fr       */
+/*   Updated: 2019/08/22 19:29:17 by forange-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	parse_width(t_printf *tprint)
 	}
 	tprint->width = ft_absi(tprint->width);
 	if (tprint->width < 0)
-		tprint->printed = -1;
+		tprint->width = 0;
 	return ;
 }
 
